@@ -1,8 +1,12 @@
 package com.example.demo.student;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.Month;
 
 
 @Configuration
@@ -23,5 +27,14 @@ public class StudentConfig {
         System.out.println("Hi" + studentRepository);
         return "Hi Metodo del Bean elaborato!";
     }
+
+//    @Bean
+//    CommandLineRunner commandLineRunner(StudentService studentService) {
+//        return args -> {
+//            Student student = new Student(2L, "mariam", "hey@gm.com", LocalDate.of(2000, Month.JANUARY, 5), 21);
+//            studentService.postStudent(student);
+//            System.out.println("Student inserted!");
+//        };
+//    };
 
 }

@@ -21,6 +21,11 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
+    public void postStudent(Student student) {
+        studentRepository.save(student);
+        System.out.println("Student saved!");
+    }
+
 
 //    public List<Student> getStudents() {
 //        System.out.println("used");

@@ -1,6 +1,7 @@
 package com.example.demo.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -13,26 +14,29 @@ public class StudentController {
 
     private final StudentService studentService;
 
-
+    @Autowired
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     };
 
 
+    @ModelAttribute
+    public void getStudents(Model model) {
+        model.addAttribute("students",studentService.getStudents());
+    }
+
     @GetMapping
-    public List<Student> getStudents() {
-        return studentService.getStudents();
+    public String getViewStudents() {
+
+//        return studentService.getStudents();
+        return "studentView";
     };
 
     @PostMapping
-    public void postStudent(@RequestParam String name) {
-        System.out.println("name of student is " + name);
-    };
+    public void createStudent(@RequestBody Student student) {
+        studentService.postStudent(student);
+        System.out.println("Student SAVED!");
+    }
 
-    @GetMapping("/hello")
-    public String sayHello(@RequestParam String name) {
-        // I just make a request in the url:   localhost:8080/hello?name=ciaociao
-        System.out.println("name is " + name);
-        return String.format("Hello %s!", name);
-    };
+
 }
